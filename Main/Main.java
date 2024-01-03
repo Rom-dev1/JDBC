@@ -4,7 +4,7 @@
  */
 package Main;
 
-import Main.MenuClient;
+//import MenuClient;
 
 import java.util.Scanner;
 
@@ -14,10 +14,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("1. OpÃ©rations sur Utilisateurs");
-            System.out.println("2. OpÃ©rations sur Clients");
-            System.out.println("3. OpÃ©rations sur Fournisseurs");
-            System.out.println("4. OpÃ©rations sur Articles");
+            System.out.println("1. Opérations sur Utilisateurs");
+            System.out.println("2. Opérations sur Clients");
+            System.out.println("3. Opérations sur Fournisseurs");
+            System.out.println("4. Opérations sur Articles");
             System.out.println("0. Quitter");
             System.out.print("Choisissez la table (0-4): ");
 
@@ -26,22 +26,22 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    // Ã€ implÃ©menter : runUser();
+                    // À implémenter : runUser();
                     break;
                 case 2:
-                    MenuClient.run();         
+                    //MenuClient.run();         
                     break;
                 case 3:
 //                    MenuFournisseurs.run();
                     break;
                 case 4:
-//                    MenuArticles.run();
+                    MenuArticles.run();
                     break;
                 case 0:
                     System.out.println("Au revoir !");
                     System.exit(0);
                 default:
-                    System.out.println("Choix invalide. Veuillez rÃ©essayer.");
+                    System.out.println("Choix invalide. Veuillez réessayer.");
             }
         }
     }
