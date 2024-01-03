@@ -4,7 +4,7 @@
  */
 package Main;
 
-import Main.MenuClient;
+//import Main.MenuClient;
 
 import java.util.Scanner;
 
@@ -29,10 +29,10 @@ public class Main {
                     // À implémenter : runUser();
                     break;
                 case 2:
-                    MenuClient.run();         
+                    //MenuClient.run();         
                     break;
                 case 3:
-//                    MenuFournisseurs.run();
+                   MenuSupplier.run();
                     break;
                 case 4:
 //                    MenuArticles.run();
