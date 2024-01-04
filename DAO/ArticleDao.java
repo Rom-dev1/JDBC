@@ -11,6 +11,8 @@ package DAO;
 
 import java.sql.*;
 import Modele.Article;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ArticleDao {
     private ArticleDao() {
@@ -56,11 +58,11 @@ public class ArticleDao {
      * methode readAll pour lire tous les articles en bbd
      */
     
-    public static void readAll() {
+    public static List<Article> readAll() {
         Connection isConnected = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        int request = -1;
+        List<Article> articles = new ArrayList<>();
         
         try{
             isConnected = Dao.connectDatabase();
@@ -74,59 +76,50 @@ public class ArticleDao {
                 String description = resultSet.getString("description");
                 String lastname = resultSet.getString("lastname");
                 Boolean state = resultSet.getBoolean("state");
-                System.out.println("Numero de l'article : " + articleNumber);
-                System.out.println("Titre : " + lastname );
-                System.out.println("Decription : " + description );
-                returnState(state);
-                System.out.println("-------------------------------");
+                Article article = new Article(articleNumber, lastname, description, state);
+                articles.add(article);
             }
         } catch(SQLException e){
             System.out.println("ERREUR : " + e);
         } 
+        return articles;
     }
     
     /**
      * methode readOne pour lire un article en bdd
      */
     
-    public static Boolean readOne(int searchArticleNumber){
+    public static Article readOne(int searchArticleNumber){
         
         Connection isConnected = null;
         PreparedStatement ps = null;
         ResultSet resultSet = null;
+        Article article = null;
         
         try{ 
-            if(selectOne(searchArticleNumber)){
-                // connection bdd
-                isConnected = Dao.connectDatabase();
-                
-                String sql = "SELECT * FROM article WHERE Article_Number=?";
-                ps = isConnected.prepareStatement(sql);
-                
-                // affection parametre
-                ps.setInt(1, searchArticleNumber);
-                
-                // execution de la requete
-                resultSet = ps.executeQuery();
-                System.out.println("Vous avez choisi l'article numero : " + searchArticleNumber);
-                if(resultSet.next()){
-                    String description = resultSet.getString("description");
-                    String lastname = resultSet.getString("lastname");
-                    Boolean state = resultSet.getBoolean("state");
-                    System.out.println("------------------------");
-                    System.out.println("Numero de l'article : " + searchArticleNumber);
-                    System.out.println("titre : " + lastname );
-                    System.out.println("decription : " + description);
-                    returnState(state);
-                    System.out.println("------------------------");
-                }
-            } else {
-                System.out.println("Desole, aucun article ne coresspond à votre recherche");
-            }
+            // connection bdd
+            isConnected = Dao.connectDatabase();
+
+            String sql = "SELECT * FROM article WHERE Article_Number=?";
+            ps = isConnected.prepareStatement(sql);
+
+            // affection parametre
+            ps.setInt(1, searchArticleNumber);
+
+            // execution de la requete
+            resultSet = ps.executeQuery();
+
+            if(resultSet.next()){
+                String description = resultSet.getString("description");
+                String lastname = resultSet.getString("lastname");
+                Boolean state = resultSet.getBoolean("state");
+                article = new Article(searchArticleNumber, lastname, description, state);
+
+            } 
         } catch(SQLException e){
             System.out.println("ERREUR : " + e);
         } 
-        return false;
+        return article;
     }
     
     /**
@@ -177,7 +170,6 @@ public class ArticleDao {
             ps = isConnected.prepareStatement(sql);
             ps.setInt(1, articleNumber);
             request = ps.executeUpdate();
-            System.out.println("Felecitation, votre article a  ete supprime ");
             
         } catch(SQLException e){
             System.out.println("ERREUR : " + e);
@@ -211,14 +203,5 @@ public class ArticleDao {
             Dao.closeResources(isConnected, ps, resultSet);
         }
         return verif;
-    }
-    
-    // Methode pour l'affichage etat
-    private static void returnState(boolean state){
-        if(state == true ){
-            System.out.println("Etat : achete");
-        } else {
-            System.out.println("Etat : vendu");
-        }
     }
 }
