@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class MenuClient {
 
      /**
-     * MÃ©thode principale pour exÃ©cuter le menu de gestion des clients.
+     * Methode principale pour executer le menu de gestion des clients.
      */
     public static void run() {
         Scanner scanner = new Scanner(System.in);
@@ -30,14 +30,14 @@ public class MenuClient {
             System.out.println("2. Supprimer un client");
             System.out.println("3. Lire un client par ID");
             System.out.println("4. Lire tous les clients");
-            System.out.println("5. Mettre à jour un client");
+            System.out.println("5. Mettre a jour un client");
             System.out.println("0. Retourner au menu principal");
             System.out.print("Choisissez une option (0-5): ");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); 
             
-            // Utilisation d'une structure switch pour gÃ©rer les diffÃ©rentes options du menu
+            // Utilisation d'une structure switch pour gerer les differentes options du menu
             switch (choice) {
                 case 1:
                     addClient(scanner);
@@ -57,14 +57,14 @@ public class MenuClient {
                 case 0:
                     return;
                 default:
-                    System.out.println("Choix invalide. Veuillez rÃ©essayer.");
+                    System.out.println("Choix invalide. Veuillez reessayer.");
             }
         }
     }
 
         /**
-     * MÃ©thode pour lire un client par ID.
-     * Appel de la mÃ©thode readById de la classe ClientDao au sein de la mÃ©thode
+     * Methode pour lire un client par ID.
+     * Appel de la methode readById de la classe ClientDao au sein de la methode
      */
     private static void readClientById(Scanner scanner) {
         System.out.print("Saisissez l'ID du client que vous souhaitez consulter : ");
@@ -73,13 +73,13 @@ public class MenuClient {
         if (clientById != null) {
             System.out.println("Informations sur le client " + clientById);
         } else {
-            System.out.println("Client non trouvé avec l'id " + clientIdToRead);
+            System.out.println("Client non trouve avec l'id " + clientIdToRead);
         }
     }
 
      /**
-     * MÃ©thode pour afficher tous les clients.
-     * Avec appel de la mÃ©thode readAll de la classe ClientDao
+     * Methode pour afficher tous les clients.
+     * Avec appel de la methode readAll de la classe ClientDao
      */
     private static void readAllClients() {
         List<Client> allClients = ClientDao.readAll();
@@ -89,32 +89,32 @@ public class MenuClient {
     }
     
      /**
-     * MÃ©thode pour supprimer un client par ID.
-     * Avec appel de la mÃ©thode delete de la classe ClientDao
+     * Methode pour supprimer un client par ID.
+     * Avec appel de la methode delete de la classe ClientDao
      */
     private static void deleteClient(Scanner scanner) {
     System.out.print("Saisissez l'ID du client que vous souhaitez supprimer : ");
     int clientIdToDelete = scanner.nextInt();
     int result = ClientDao.delete(clientIdToDelete);
     if (result != -1) {
-        System.out.println("Client supprimé avec succès !");
+        System.out.println("Client supprime avec succes !");
     } else {
-        System.out.println("échec de la suppression du client.");
+        System.out.println("echec de la suppression du client.");
     }
 }
     
     
     
     /**
-     * MÃ©thode pour mettre Ã  jour un client.
-     * Avec appel de la mÃ©thode update de la classe ClientDao
+     * Methode pour mettre a jour un client.
+     * Avec appel de la methode update de la classe ClientDao
      */
     private static void updateClient(Scanner scanner) {
-    System.out.print("Saisissez l'ID du client que vous souhaitez mettre à jour : ");
+    System.out.print("Saisissez l'ID du client que vous souhaitez mettre a jour : ");
     int clientIdToUpdate = scanner.nextInt();
     scanner.nextLine(); // Pour consommer la nouvelle ligne
 
-    // Lire les informations actuelles du client Ã  partir de la base de donnÃ©es
+    // Lire les informations actuelles du client a partir de la base de donnees
     Client clientToUpdate = ClientDao.readById(clientIdToUpdate);
 
     if (clientToUpdate != null) {
@@ -124,14 +124,14 @@ public class MenuClient {
         boolean updateCompleted = false;
 
         while (!updateCompleted) {
-            // Affichez un menu pour demander quels champs l'utilisateur souhaite mettre Ã  jour
-            System.out.println("\nSélectionnez les champs à mettre à jour :");
-            System.out.println("1. Numéro du client");
+            // Affichez un menu pour demander quels champs l'utilisateur souhaite mettre a jour
+            System.out.println("\nSelectionnez les champs a mettre a jour :");
+            System.out.println("1. Numero du client");
             System.out.println("2. Nom du client");
-            System.out.println("3. Prénom du client");
+            System.out.println("3. Prenom du client");
             System.out.println("4. Email du client");
             System.out.println("5. Adresse du client");
-            System.out.println("0. Annuler et quitter la mise à jour");
+            System.out.println("0. Annuler et quitter la mise a jour");
 
             System.out.print("Choisissez une option (0-5) : ");
             int updateChoice = scanner.nextInt();
@@ -139,7 +139,7 @@ public class MenuClient {
 
             switch (updateChoice) {
                 case 1:
-                    System.out.print("Nouveau numéro du client : ");
+                    System.out.print("Nouveau numero du client : ");
                     int newClientNumber = scanner.nextInt();
                     clientToUpdate.setClientNumber(newClientNumber);
                     break;
@@ -149,7 +149,7 @@ public class MenuClient {
                         System.out.print("Nouveau nom du client : ");
                         newLastname = scanner.nextLine().trim();
                         if (newLastname.isEmpty()) {
-                            System.out.println("Erreur : Le nom ne peut pas Ãªtre vide. Veuillez rÃ©essayer.");
+                            System.out.println("Erreur : Le nom ne peut pas etre vide. Veuillez reessayer.");
                         }
                     } while (newLastname.isEmpty());
                     clientToUpdate.setLastname(newLastname);
@@ -157,10 +157,10 @@ public class MenuClient {
                 case 3:
                     String newFirstname;
                     do {
-                        System.out.print("Nouveau prénom du client : ");
+                        System.out.print("Nouveau prenom du client : ");
                         newFirstname = scanner.nextLine().trim();
                         if (newFirstname.isEmpty()) {
-                            System.out.println("Erreur : Le prénom ne peut pas Ãªtre vide. Veuillez rÃ©essayer.");
+                            System.out.println("Erreur : Le prenom ne peut pas etre vide. Veuillez reessayer.");
                         }
                     } while (newFirstname.isEmpty());
                     clientToUpdate.setFirstname(newFirstname);
@@ -171,9 +171,9 @@ public class MenuClient {
                         System.out.print("Nouvel email du client : ");
                         newEmail = scanner.nextLine().trim();
                         if (newEmail.isEmpty()) {
-                            System.out.println("Erreur : L'email ne peut pas Ãªtre vide. Veuillez réessayer.");
+                            System.out.println("Erreur : L'email ne peut pas etre vide. Veuillez reessayer.");
                         } else if (!isValidEmail(newEmail)) {
-                            System.out.println("Erreur : Le format de l'email n'est pas valide. Veuillez réessayer.");
+                            System.out.println("Erreur : Le format de l'email n'est pas valide. Veuillez reessayer.");
                         }
                     } while (newEmail.isEmpty() || !isValidEmail(newEmail));
                     clientToUpdate.setEmail(newEmail);
@@ -184,53 +184,53 @@ public class MenuClient {
                         System.out.print("Nouvelle adresse du client : ");
                         newAddress = scanner.nextLine().trim();
                         if (newAddress.isEmpty()) {
-                            System.out.println("Erreur : L'adresse ne peut pas être vide. Veuillez réessayer.");
+                            System.out.println("Erreur : L'adresse ne peut pas etre vide. Veuillez reessayer.");
                         }
                     } while (newAddress.isEmpty());
                     clientToUpdate.setAddress(newAddress);
                     break;
                 case 0:
-                    System.out.println("Mise Ã  jour annulée.");
+                    System.out.println("Mise a jour annulee.");
                     return;
                 default:
-                    System.out.println("Choix invalide. Veuillez réessayer.");
+                    System.out.println("Choix invalide. Veuillez reessayer.");
                     break;
             }
 
-            System.out.print("Voulez-vous mettre Ã  jour un autre champ ? (O/N) : ");
-            // RÃ©cupÃ¨re la rÃ©ponse de l'utilisateur en convertissant les espaces inutiles, met en majuscules pour une comparaison insensible Ã  la casse
+            System.out.print("Voulez-vous mettre a jour un autre champ ? (O/N) : ");
+            // Recupere la reponse de l'utilisateur en convertissant les espaces inutiles, met en majuscules pour une comparaison insensible a la casse
             String continueUpdate = scanner.nextLine().trim().toUpperCase();
 
-            // VÃ©rifie si l'utilisateur ne souhaite pas continuer la mise Ã  jour en comparant la rÃ©ponse Ã  "O" (non-insensible Ã  la casse)
+            // Verifie si l'utilisateur ne souhaite pas continuer la mise a jour en comparant la rÃ©ponse a "O" (non-insensible a la casse)
             if (!continueUpdate.equals("O")) {
                 updateCompleted = true;
             }
         }
 
-        // Appelez la mÃ©thode update du ClientDao
+        // Appelez la methode update du ClientDao
         int result = ClientDao.update(clientToUpdate);
         if (result != -1) {
-            System.out.println("Client mis à jour avec succès !");
+            System.out.println("Client mis a jour avec succes !");
         } else {
-            System.out.println("échec de la mise à jour du client.");
+            System.out.println("echec de la mise a jour du client.");
         }
     } else {
-        System.out.println("Client non trouvé avec l'ID " + clientIdToUpdate);
+        System.out.println("Client non trouve avec l'ID " + clientIdToUpdate);
     }
 }
 
     
     
     /**
-     * MÃ©thode pour ajouter un nouveau client.
-     * Avec appel de la mÃ©thode add de la classe ClientDao
+     * Methode pour ajouter un nouveau client.
+     * Avec appel de la methode add de la classe ClientDao
      */
     private static void addClient(Scanner scanner) {
     int clientNumber;
     String lastName, firstName, email, address;
 
     // Saisir le numÃ©ro du client
-    System.out.print("Numéro du client : ");
+    System.out.print("Numero du client : ");
     clientNumber = scanner.nextInt();
     scanner.nextLine(); // Pour consommer la nouvelle ligne
 
@@ -240,17 +240,17 @@ public class MenuClient {
         lastName = scanner.nextLine().trim();
 
         if (lastName.isEmpty()) {
-            System.out.println("Erreur : Le nom ne peut pas être vide. Veuillez réessayer.");
+            System.out.println("Erreur : Le nom ne peut pas etre vide. Veuillez reessayer.");
         }
     } while (lastName.isEmpty());
 
-    // Saisir le prÃ©nom du client
+    // Saisir le prenom du client
     do {
-        System.out.print("PrÃ©nom du client : ");
+        System.out.print("Prenom du client : ");
         firstName = scanner.nextLine().trim();
 
         if (firstName.isEmpty()) {
-            System.out.println("Erreur : Le prénom ne peut pas être vide. Veuillez réessayer.");
+            System.out.println("Erreur : Le prenom ne peut pas etre vide. Veuillez reessayer.");
         }
     } while (firstName.isEmpty());
 
@@ -260,9 +260,9 @@ public class MenuClient {
         email = scanner.nextLine().trim();
 
         if (email.isEmpty()) {
-            System.out.println("Erreur : L'email ne peut pas être vide. Veuillez rÃ©essayer.");
+            System.out.println("Erreur : L'email ne peut pas etre vide. Veuillez reessayer.");
         } else if (!isValidEmail(email)) {
-            System.out.println("Erreur : Le format de l'email n'est pas valide. Veuillez réessayer.");
+            System.out.println("Erreur : Le format de l'email n'est pas valide. Veuillez reessayer.");
         }
     } while (email.isEmpty() || !isValidEmail(email));
 
@@ -272,19 +272,19 @@ public class MenuClient {
         address = scanner.nextLine().trim();
 
         if (address.isEmpty()) {
-            System.out.println("Erreur : L'adresse ne peut pas être vide. Veuillez réessayer.");
+            System.out.println("Erreur : L'adresse ne peut pas etre vide. Veuillez reessayer.");
         }
     } while (address.isEmpty());
 
-    // CrÃ©ation d'un nouvel objet Client avec les informations saisies
+    // Creation d'un nouvel objet Client avec les informations saisies
     Client newClient = new Client(clientNumber, lastName, firstName, email, address);
 
-    // Appelez la mÃ©thode add du ClientDao
+    // Appelez la methode add du ClientDao
     int result = ClientDao.add(newClient);
     if (result != -1) {
-        System.out.println("Client ajouté avec succès !");
+        System.out.println("Client ajoute avec succes !");
     } else {
-        System.out.println("échec de l'ajout du client.");
+        System.out.println("echec de l'ajout du client.");
     }
 }
     
@@ -292,9 +292,9 @@ public class MenuClient {
     
     
     
-    // Ajouter cette mÃ©thode pour vÃ©rifier le format de l'email
+    // Ajouter cette methode pour verifier le format de l'email
     private static boolean isValidEmail(String email) {
-        // Utilisez une expression rÃ©guliÃ¨re simple pour vÃ©rifier le format de l'email
+        // Utilisez une expression reguliere simple pour verifier le format de l'email
         String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$";
         return email.matches(emailRegex);
     }
