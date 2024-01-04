@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 
 /**
- * La classe Client représente un client avec des informations telles que le numéro, le nom, le prénom,
+ * La classe Client represente un client avec des informations telles que le numero, le nom, le prenom,
  * l'email et l'adresse.
- * Implemente l'interface Serializable pour permettre la sérialisation des objets de cette classe.
+ * Implemente l'interface Serializable pour permettre la serialisation des objets de cette classe.
  */
 
 public class Client implements Serializable {
@@ -23,10 +23,10 @@ public class Client implements Serializable {
 
     
         /**
-     * Constructeur pour créer un nouveau client sans spécifier l'ID.
-     * @param clientNumber Numéro du client.
+     * Constructeur pour creer un nouveau client sans specifier l'ID.
+     * @param clientNumber Numero du client.
      * @param lastname Nom du client.
-     * @param firstname Prénom du client.
+     * @param firstname Prenom du client.
      * @param email Email du client.
      * @param address Adresse du client.
      */
@@ -39,11 +39,11 @@ public class Client implements Serializable {
     }
 
         /**
-     * Constructeur pour créer un nouveau client en spécifiant l'ID.
+     * Constructeur pour creer un nouveau client en specifiant l'ID.
      * @param id Identifiant unique du client.
-     * @param clientNumber Numéro du client.
+     * @param clientNumber Numero du client.
      * @param lastname Nom du client.
-     * @param firstname Prénom du client.
+     * @param firstname Prenom du client.
      * @param email Email du client.
      * @param address Adresse du client.
      */
@@ -57,7 +57,7 @@ public class Client implements Serializable {
     }
 
     
-    // Getters et setters pour accéder et modifier les attributs privés de la classe
+    // Getters et setters pour acceder et modifier les attributs prives de la classe
     public int getId() {
         return id;
     }
@@ -107,9 +107,9 @@ public class Client implements Serializable {
     }
 
     
-     // Méthode pour obtenir une représentation textuelle du client
+     // Methode pour obtenir une representation textuelle du client
     @Override
     public String toString() {
-        return "Client N° " + clientNumber + " (id " + id + ") : " + lastname + " " + firstname + ", " + email + ", " + address + '.';
+        return "Client N " + clientNumber + " (id " + id + ") : " + lastname + " " + firstname + ", " + email + ", " + address + '.';
     }
 }
