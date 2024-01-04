@@ -71,4 +71,9 @@ public class Article implements Serializable {
     public void setState(Boolean state) {
         this.state = state;
     }
+    
+    @Override
+    public String toString() {
+        return "Article numéro : " + articleNumber + ", titre: " + lastname + ", description : " + description;
+    }
 }

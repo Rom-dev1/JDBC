@@ -7,6 +7,7 @@ package Main;
 import DAO.ArticleDao;
 import Modele.Article;
 import java.util.Scanner;
+import java.util.List;
 
 /**
  *
@@ -19,7 +20,6 @@ public class MenuArticles {
      */
     
     public static void run(){
-    System.out.println("Consulter les articles : ");
         
     Scanner scanner = new Scanner(System.in);
 
@@ -27,6 +27,7 @@ public class MenuArticles {
 
         while(again){
             System.out.println("Menu:");
+            System.out.println();
             System.out.println("1. Inserer un article");
             System.out.println("2. Lire tous les articles");
             System.out.println("3. Lire un article");
@@ -42,7 +43,7 @@ public class MenuArticles {
                         addMenu();
                         break;
                     case 2:
-                        ArticleDao.readAll();
+                        readAllMenu();
                         break;
                     case 3:
                         readOneMenu();
@@ -58,9 +59,12 @@ public class MenuArticles {
                         again = false;
                         break;
                     default:
+                        System.out.println();
                         System.out.println("Choix invalide. Veuillez reessayer.");
+                        System.out.println();
                 } 
             } else {
+                System.out.println();
                 System.out.println("Merci de saisir un chiffre coresspondant au choix du menu");  
                 scanner.next();
             }
@@ -84,8 +88,10 @@ public class MenuArticles {
             if(scanner.hasNextInt()){
                 articleNumber = scanner.nextInt();
                 // verification dans bdd si un article possedant le meme numero est déja présent
-                if(ArticleDao.selectOne(articleNumber)){
+                if(ArticleDao.readOne(articleNumber) != null){
+                    System.out.println();
                     System.out.println("Desole, un article a deja ce numero, merci de saisir un nouveau numero d'article..");
+                    System.out.println();
                 } else {
                     verifNumber = true;
                 }
@@ -131,6 +137,19 @@ public class MenuArticles {
         // cration de l'article et ajout de l'article en bdd
         Article art = new Article(articleNumber, lastname.trim(), description.trim(), state);
         ArticleDao.add(art);
+    }
+    
+    private static void readAllMenu(){
+        List<Article> articles = ArticleDao.readAll();
+        for(Article article : articles){
+            System.out.println(article);
+            if(article.getState() == true ){
+                System.out.println("Etat : achete");
+            } else {
+                System.out.println("Etat : vendu");
+            }
+            System.out.println("----------------");
+        }
     }
     
     /**
@@ -192,11 +211,16 @@ public class MenuArticles {
         while(!verifNumber){
             if(scanner.hasNextInt()){
             searchArticleNumber = scanner.nextInt();
-                if(ArticleDao.selectOne(searchArticleNumber)){
-                    updateMenu(searchArticleNumber);
+                if(ArticleDao.readOne(searchArticleNumber) == null){
+                    System.out.println();
+                    System.out.println("Desole, aucun article ne coresspond a votre recherche");
+                    System.out.println();
                     verifNumber = true;
                 } else {
-                    System.out.println("Desole, cet article n'est pas present dans la bdd");
+                    updateMenu(searchArticleNumber);
+                    System.out.println();
+                    System.out.println("Felecitation, article modifie avec succes");
+                    System.out.println();
                     verifNumber = true;
                 }
             } else {
@@ -212,10 +236,26 @@ public class MenuArticles {
     
     private static void readOneMenu(){
         Scanner scanner = new Scanner(System.in);
+        boolean displayState = true;
+        int choiceDisplayArticle = 0;
+        
         System.out.println("Quel numero article souhaitez vous consulter ? ");
         if(scanner.hasNextInt()){
-            int choiceDisplayArticle = scanner.nextInt();
-            ArticleDao.readOne(choiceDisplayArticle);
+            choiceDisplayArticle = scanner.nextInt();
+            if(ArticleDao.readOne(choiceDisplayArticle) == null){
+                System.out.println();
+                System.out.println("Desole, aucun article ne coresspond a votre recherche");
+                System.out.println();
+            } else {
+                System.out.println(ArticleDao.readOne(choiceDisplayArticle));
+                displayState = ArticleDao.readOne(choiceDisplayArticle).getState();
+                if(displayState == true){
+                    System.out.println("etat = achete");
+                } else {
+                    System.out.println("etat = vendu");
+                
+                }
+            }
         } else {
             System.out.println("Erreur de saisie, merci de rééssayer.");
             scanner.next();
@@ -232,11 +272,14 @@ public class MenuArticles {
         System.out.println("Quel numero article souhaitez vous supprimer ? ");
         if(scanner.hasNextInt()){
             int choiceDeleteArticle = scanner.nextInt();
-            if(ArticleDao.selectOne(choiceDeleteArticle)){
-                ArticleDao.delete(choiceDeleteArticle);
-                verifNumber = true;
+            if(ArticleDao.readOne(choiceDeleteArticle) == null){
+            System.out.println("Desole, aucun article ne coresspond a votre recherche");
+            verifNumber = true;
             } else {
-                System.out.println("Desole, cet article n'est pas present dans la bdd");
+               ArticleDao.delete(choiceDeleteArticle);
+               System.out.println();
+               System.out.println("Felecitation, votre article a  ete supprime ");
+               System.out.println();
             }
         } else {
             System.out.println("Erreur de saisie, merci de rééssayer avec un numero d'article.");
