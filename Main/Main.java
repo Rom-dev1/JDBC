@@ -12,10 +12,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("1. Op�rations sur Utilisateurs");
-            System.out.println("2. Op�rations sur Clients");
-            System.out.println("3. Op�rations sur Fournisseurs");
-            System.out.println("4. Op�rations sur Articles");
+            System.out.println("1. Operations sur Utilisateurs");
+            System.out.println("2. Operations sur Clients");
+            System.out.println("3. Operations sur Fournisseurs");
+            System.out.println("4. Operations sur Articles");
             System.out.println("0. Quitter");
             System.out.print("Choisissez la table (0-4): ");
 
@@ -24,10 +24,10 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    // � impl�menter : runUser();
+                   MainUser.run();
                     break;
                 case 2:
-                    //MenuClient.run();         
+                    MenuClient.run();         
                     break;
                 case 3:
                    MenuSupplier.run();
@@ -39,7 +39,7 @@ public class Main {
                     System.out.println("Au revoir !");
                     System.exit(0);
                 default:
-                    System.out.println("Choix invalide. Veuillez r�essayer.");
+                    System.out.println("Choix invalide. Veuillez reessayer.");
             }
         }
     }
