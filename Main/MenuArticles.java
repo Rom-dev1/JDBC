@@ -28,7 +28,7 @@ public class MenuArticles {
             System.out.println("3. Lire un article");
             System.out.println("4. Modifier un article");
             System.out.println("5. Supprimer un article");
-            System.out.println("0. Quitter");
+            System.out.println("0. Menu principal");
             
             boolean state = false;
             boolean verifAnswer = false;
@@ -43,39 +43,39 @@ public class MenuArticles {
                         ArticleDao.readAll();
                         break;
                     case 3:
-                        System.out.println("Quel numéro article souhaitez vous consulter ? ");
+                        System.out.println("Quel numï¿½ro article souhaitez vous consulter ? ");
                         if(scanner.hasNextInt()){
                             int choiceDisplayArticle = scanner.nextInt();
                             ArticleDao.readOne(choiceDisplayArticle);
                         } else {
-                            System.out.println("Aucun numéro d'article ne coresspond à votre demande.");
+                            System.out.println("Aucun numï¿½ro d'article ne coresspond ï¿½ votre demande.");
                             scanner.next();
                         }
                         break;
                     case 4:
-                        System.out.println("Quel est le numéro de l'article que vous souhaitez modifier ? ");
+                        System.out.println("Quel est le numï¿½ro de l'article que vous souhaitez modifier ? ");
                         if(scanner.hasNextInt()){
                             searchArticleNumber = scanner.nextInt();
                             if(ArticleDao.selectOne(searchArticleNumber)){
                                 updateMenu(searchArticleNumber);
                             } else {
-                                System.out.println("Désolé, cet article n'est pas présent dans la bdd");
+                                System.out.println("Dï¿½solï¿½, cet article n'est pas prï¿½sent dans la bdd");
                             }
                         } else {
-                            System.out.println("Merci de saisir un numéro d'article");
+                            System.out.println("Merci de saisir un numï¿½ro d'article");
                         }
                         break;
                     case 5:
-                        System.out.println("Quel numéro d'article souhaitez vous consulter ? ");
+                        System.out.println("Quel numï¿½ro d'article souhaitez vous consulter ? ");
                         int choiceDeleteArticle = scanner.nextInt();
                         ArticleDao.delete(choiceDeleteArticle);
                         break;
                     case 0:
-                        System.out.println("Au revoir!");
+                        System.out.println("Menu Principal");
                         again = false;
                         break;
                     default:
-                        System.out.println("Choix invalide. Veuillez réessayer.");
+                        System.out.println("Choix invalide. Veuillez rï¿½essayer.");
                 } 
             } else {
                 System.out.println("Merci de saisir un chiffre coresspondant au choix du menu");  
@@ -102,11 +102,11 @@ public class MenuArticles {
         }
         
         while(!verifNumber){
-            System.out.println("Numéro de l'article :");
+            System.out.println("Numï¿½ro de l'article :");
             if(scanner.hasNextInt()){
                 articleNumber = scanner.nextInt();
                 if(ArticleDao.selectOne(articleNumber)){
-                    System.out.println("Désolé, un article à déja ce numéro, merci de saisir un nouveau numéro d'article..");
+                    System.out.println("Dï¿½solï¿½, un article ï¿½ dï¿½ja ce numï¿½ro, merci de saisir un nouveau numï¿½ro d'article..");
                 } else {
                     verifNumber = true;
                 }
@@ -123,7 +123,7 @@ public class MenuArticles {
             description = scanner.next();
         }
         while(!verifAnswer){
-            System.out.println("Article acheté ? (oui/non) ");
+            System.out.println("Article achetï¿½ ? (oui/non) ");
             stateAnswer = scanner.next().toLowerCase();
             if(stateAnswer.equals("oui")){
                 state = true;
@@ -164,7 +164,7 @@ public class MenuArticles {
         }
         while(!verifAnswer){
          
-            System.out.println("Article acheté ? (oui/non) ");
+            System.out.println("Article achetï¿½ ? (oui/non) ");
             stateAnswer = scanner.next().toLowerCase();
 
             if(stateAnswer.equals("oui")){
@@ -183,7 +183,7 @@ public class MenuArticles {
     
     private static Boolean verifLength(String str){
         if(str.length() < 2 ){
-            System.out.println("Erreur de saisie, minimun 2 caractères.");
+            System.out.println("Erreur de saisie, minimun 2 caractï¿½res.");
             return true;
         } else {
             return false;
